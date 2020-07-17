@@ -66,7 +66,8 @@ class PaperSelectEbdContent extends Component {
     let parentElement = this.renderInPlace ? dropdownElement.parentElement.parentElement : dropdownElement.parentElement;
     let clone = dropdownElement.cloneNode(true);
     clone.id = `${clone.id}--clone`;
-    parentElement.appendChild(clone);
+
+    if(parentElement) parentElement.appendChild(clone);
 
     clone.children[0].children[0].scrollTop = dropdownElement.children[0].children[0].scrollTop;
 
@@ -77,10 +78,10 @@ class PaperSelectEbdContent extends Component {
       clone.classList.add('md-leave');
       waitForAnimations(clone, function() {
         clone.classList.remove('md-active');
-        parentElement.removeChild(clone);
+        if(parentElement)parentElement.removeChild(clone);
       });
     } else {
-      parentElement.removeChild(clone);
+      if(parentElement) parentElement.removeChild(clone);
     }
   }
 
